@@ -6,7 +6,8 @@ import {
 import { getCounter } from "./selectors";
 import {
   increment,
-  decrement
+  decrement,
+  reset
 } from './actions'
 import { CounterWidget } from "../../components/CounterWidget/CounterWidget";
 
@@ -22,12 +23,17 @@ function CounterPage() {
     dispath(decrement())
   }
 
+  const handleResetBtnClick = () => {
+    dispath(reset())
+  }
+
   return (
     <div>
       <CounterWidget 
         counter={counter}
         onIncrementBtnClick={handleIncrementBtnClick}
-        onDecrementBtnClick={handleDecrementBtnClick}/>
+        onDecrementBtnClick={handleDecrementBtnClick}
+        onResetBtnClick={handleResetBtnClick}/>
     </div>
   )
 }

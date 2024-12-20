@@ -1,6 +1,7 @@
 import { 
   COUNTER_INCREMENT,
-  COUNTER_DECREMENT 
+  COUNTER_DECREMENT,
+  COUNTER_RESET
 } from './constants'
 
 export const increment = () => {
@@ -12,5 +13,11 @@ export const increment = () => {
 export const decrement = () => {
   return {
     type: COUNTER_DECREMENT
+  }
+}
+
+export const reset = () => {
+  return {
+    type: COUNTER_RESET
   }
 }
