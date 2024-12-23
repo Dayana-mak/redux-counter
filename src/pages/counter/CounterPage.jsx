@@ -1,30 +1,34 @@
-import { useDispatch, useSelector } from "react-redux"
-import { 
-  COUNTER_INCREMENT,
-  COUNTER_DECREMENT 
-} from './constants'
-import { getCounter } from "./selectors";
+import { useDispatch, useSelector } from "react-redux";
 import {
   increment,
   decrement,
-  reset
+  reset,
+  load
 } from './actions'
+import { 
+  getCounter
+} from "./selectors";
 import { CounterWidget } from "../../components/CounterWidget/CounterWidget";
+import { useEffect } from "react";
 
 function CounterPage() {
   const counter = useSelector(getCounter);
-  const dispath = useDispatch();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(load());
+  }, []);
 
   const handleIncrementBtnClick = () => {
-    dispath(increment())
+    dispatch(increment())
   }
 
   const handleDecrementBtnClick = () => {
-    dispath(decrement())
+    dispatch(decrement())
   }
 
   const handleResetBtnClick = () => {
-    dispath(reset())
+    dispatch(reset())
   }
 
   return (
