@@ -7,7 +7,6 @@ createServer({
     this.namespace = "api"
 
     this.get('/counter', () => {
-      return newResponse(500);
       return {
         counter: INITIAL_COUNTER
       }
