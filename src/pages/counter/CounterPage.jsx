@@ -3,12 +3,16 @@ import {
   increment,
   decrement,
   reset,
-  load
+  load,
+  save
 } from './actions'
 import { 
   getCounter,
   getIsLoading,
-  getIsError
+  getIsError,
+  getIsSaveSuccess,
+  getIsSaveLoading,
+  getIsSaveError
 } from "./selectors";
 import { CounterWidget } from "../../components/CounterWidget/CounterWidget";
 import { useEffect } from "react";
@@ -17,6 +21,11 @@ function CounterPage() {
   const counter = useSelector(getCounter);
   const isLoading = useSelector(getIsLoading);
   const isError = useSelector(getIsError);
+
+  const isSaveSuccess = useSelector(getIsSaveSuccess);
+  const isSaveLoading = useSelector(getIsSaveLoading);
+  const isSaveError = useSelector(getIsSaveError);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -38,6 +47,10 @@ function CounterPage() {
   const handleRetryBtnClick = () => {
     dispatch(load())
   }
+
+  const handleSaveBtnClick = () => {
+    dispatch(save(counter))
+  }
   
 
   return (
@@ -46,10 +59,14 @@ function CounterPage() {
         counter={counter}
         isLoading={isLoading}
         isError={isError}
+        isSaveSuccess={isSaveSuccess}
+        isSaveLoading={isSaveLoading}
+        isSaveError={isSaveError}
         onIncrementBtnClick={handleIncrementBtnClick}
         onDecrementBtnClick={handleDecrementBtnClick}
         onResetBtnClick={handleResetBtnClick}
-        onRetryBtnClick={handleRetryBtnClick}/>
+        onRetryBtnClick={handleRetryBtnClick}
+        onSaveBtnClick={handleSaveBtnClick}/>
     </div>
   )
 }

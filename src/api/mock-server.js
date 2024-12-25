@@ -1,6 +1,6 @@
-import { createServer } from "miragejs"
+import { createServer, Response } from "miragejs"
 
-const INITIAL_COUNTER = 10;
+let INITIAL_COUNTER = 10;
 
 createServer({
   routes() {
@@ -11,5 +11,15 @@ createServer({
         counter: INITIAL_COUNTER
       }
     });
-  },
+
+    this.post('/counter/save', (schema, request) => {
+      const counter = JSON.parse(request.requestBody).counter;
+      console.log("Получено от клиента:", counter);
+
+      return {
+        status: 'ok'
+      }
+    })
+
+  }
 })

@@ -4,8 +4,12 @@ import {
   COUNTER_RESET,
 
   COUNTER_LOADING,
-  COUNTER_LOADING_SUCCES,
+  COUNTER_LOADING_SUCCESS,
   COUNTER_LOADING_ERROR,
+  
+  COUNTER_SAVE_LOADING,
+  COUNTER_SAVE_LOADING_SUCCESS,
+  COUNTER_SAVE_LOADING_ERROR
 } from './constants'
 
 import { API } from './api';
@@ -17,7 +21,7 @@ export const load = () => {
     API.getCounter()
       .then(data => {
         dispatch({
-          type: COUNTER_LOADING_SUCCES,
+          type: COUNTER_LOADING_SUCCESS,
           payload: data.counter
         });
       })
@@ -27,6 +31,19 @@ export const load = () => {
   }
 }
 
+export const save = (counter) => {
+  return (dispatch) => {
+    dispatch({type: COUNTER_SAVE_LOADING});
+
+    API.saveCounter(counter)
+      .then(() => {
+        dispatch({ type: COUNTER_SAVE_LOADING_SUCCESS });
+      })
+      .catch(() => {
+        dispatch({type: COUNTER_SAVE_LOADING_ERROR});
+      })
+  }
+}
 export const increment = () => {
   return {
     type: COUNTER_INCREMENT
